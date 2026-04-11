@@ -32,7 +32,13 @@ function App() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+      <div style={{
+        minHeight: "100vh",
+        background: "#0f172a",
+        color: "white",
+        textAlign: "center",
+        padding: "40px"
+      }}>
       <h1>MotoTrack 🚗</h1>
 
       <form onSubmit={handleSubmit}>
