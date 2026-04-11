@@ -14,5 +14,11 @@ export const addVehicle = async (data) => {
     body: JSON.stringify(data),
   });
 
+export const deleteVehicle = async (id) => {
+  await fetch(`${BASE_URL}/${id}`, {
+    method: "DELETE",
+  });
+};
+
   return res.json();
 };

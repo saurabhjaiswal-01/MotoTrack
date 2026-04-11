@@ -22,4 +22,13 @@ const getVehicles = async (req, res) => {
   }
 };
 
-module.exports = { createVehicle, getVehicles };
+const deleteVehicle = async (req, res) => {
+  try {
+    await Vehicle.findByIdAndDelete(req.params.id);
+    res.json({ message: "Deleted" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+module.exports = { createVehicle, getVehicles, deleteVehicle };

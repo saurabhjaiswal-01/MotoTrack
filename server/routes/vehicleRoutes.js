@@ -8,5 +8,6 @@ const {
 
 router.post("/", createVehicle);
 router.get("/", getVehicles);
+router.delete("/:id", deleteVehicle);
 
 module.exports = router;

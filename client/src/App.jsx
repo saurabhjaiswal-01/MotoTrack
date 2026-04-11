@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getVehicles, addVehicle } from "./api";
+import { getVehicles, addVehicle, deleteVehicle  } from "./api";
 
 function App() {
   const [vehicles, setVehicles] = useState([]);
@@ -26,6 +26,11 @@ function App() {
     fetchVehicles();
   };
 
+  const handleDelete = async (id) => {
+    await deleteVehicle(id);
+  fetchVehicles();
+  };
+
   return (
     <div style={{ padding: "20px" }}>
       <h1>MotoTrack 🚗</h1>
@@ -48,9 +53,10 @@ function App() {
 
       <ul>
         {vehicles.map((v) => (
-          <li key={v._id}>
+          <div key={v._id}>
             {v.name} - {v.numberPlate}
-          </li>
+            <button onClick={() => handleDelete(v._id)}>Delete</button>
+          </div>
         ))}
       </ul>
     </div>
