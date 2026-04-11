@@ -12,13 +12,12 @@ export const addVehicle = async (data) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
-  });
+  })};
 
 export const deleteVehicle = async (id) => {
-  await fetch(`${BASE_URL}/${id}`, {
+  const res = await fetch(`${BASE_URL}/${id}`, {
     method: "DELETE",
   });
-};
 
   return res.json();
 };
