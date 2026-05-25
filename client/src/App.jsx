@@ -21,6 +21,8 @@ function App() {
   const [name, setName] = useState("");
   const [numberPlate, setNumberPlate] = useState("");
 
+  const [filterVehicle, setFilterVehicle] = useState("");
+
   useEffect(() => {
     fetchVehicles();
     fetchServices();
@@ -83,9 +85,14 @@ function App() {
     0
   );
 
+  const filteredServices = filterVehicle
+  ? services.filter((s) => s.vehicleId === filterVehicle)
+  : services;
+
   return (
       <div className="container">
       <h1>MotoTrack 🚗</h1>
+      
 
       <div className="dashboard">
         <div className="dashboard-card">
@@ -158,36 +165,58 @@ function App() {
       <h2>Vehicles</h2>
 
       <ul>
-        {vehicles.map((v) => (
-          <div key={v._id} className="vehicle-card">
-            {v.name} - {v.numberPlate}
-            <button
-              className="delete-btn"
-              onClick={() => handleDelete(v._id)}
-            >
-              Delete
-            </button>
-          </div>
-        ))}
+        {vehicles.length === 0 ? (
+          <p>No vehicles added yet</p>
+        ) : (
+          vehicles.map((v) => (
+            <div key={v._id} className="vehicle-card">
+              {v.name} - {v.numberPlate}
+
+              <button
+                className="delete-btn"
+                onClick={() => handleDelete(v._id)}
+              >
+                Delete
+              </button>
+            </div>
+          ))
+        )}
+      </ul>
 
         <h2>Service History</h2>
 
-        {services.map((s, i) => (
-          <div key={i} className="service-card">
-            <p>Service: {s.serviceType}</p>
-            <p>Cost: ₹{s.cost}</p>
-            <p>Date: {s.serviceDate}</p>
-            <button
-              className="delete-btn"
-              onClick={() => handleDeleteService(s._id)}
-            >
-              Delete
-            </button>
-          </div>
-        ))}
-      </ul>
-    </div>
-  );
+        <select
+          value={filterVehicle}
+          onChange={(e) => setFilterVehicle(e.target.value)}
+        >
+          <option value="">All Vehicles</option>
+
+          {vehicles.map((v) => (
+            <option key={v._id} value={v._id}>
+              {v.name}
+            </option>
+          ))}
+        </select>
+
+        {filteredServices.length === 0 ? (
+          <p>No services found</p>
+        ) : (
+          filteredServices.map((s, i) => (
+            <div key={i} className="service-card">
+              <p>Service: {s.serviceType}</p>
+              <p>Cost: ₹{s.cost}</p>
+              <p>Date: {s.serviceDate}</p>
+
+              <button
+                className="delete-btn"
+                onClick={() => handleDeleteService(s._id)}
+              >
+                Delete
+              </button>
+            </div>
+          ))
+        )}
+      </div>);
 }
 
 export default App;
