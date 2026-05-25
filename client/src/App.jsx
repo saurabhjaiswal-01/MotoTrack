@@ -1,3 +1,4 @@
+import "./App.css";
 import { useEffect, useState } from "react";
 import {
   getVehicles,
@@ -68,13 +69,7 @@ function App() {
   };
 
   return (
-      <div style={{
-        minHeight: "100vh",
-        background: "#0f172a",
-        color: "white",
-        textAlign: "center",
-        padding: "40px"
-      }}>
+      <div className="container">
       <h1>MotoTrack 🚗</h1>
 
       <form onSubmit={handleSubmit}>
@@ -132,24 +127,21 @@ function App() {
 
       <ul>
         {vehicles.map((v) => (
-          <div key={v._id}>
+          <div key={v._id} className="vehicle-card">
             {v.name} - {v.numberPlate}
-            <button onClick={() => handleDelete(v._id)}>Delete</button>
+            <button
+              className="delete-btn"
+              onClick={() => handleDelete(v._id)}
+            >
+              Delete
+            </button>
           </div>
         ))}
 
         <h2>Service History</h2>
 
         {services.map((s, i) => (
-          <div
-            key={i}
-            style={{
-              background: "#1e293b",
-              padding: "10px",
-              margin: "10px",
-              borderRadius: "8px",
-            }}
-          >
+          <div key={i} className="service-card">
             <p>Service: {s.serviceType}</p>
             <p>Cost: ₹{s.cost}</p>
             <p>Date: {s.serviceDate}</p>
