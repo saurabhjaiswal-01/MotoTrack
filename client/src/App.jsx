@@ -5,7 +5,8 @@ import {
   addVehicle,
   deleteVehicle,
   getServices,
-  addService
+  addService,
+  deleteService,
 } from "./api";
 
 function App() {
@@ -67,6 +68,11 @@ function App() {
     await deleteVehicle(id);
   fetchVehicles();
   };
+
+  const handleDeleteService = async (id) => {
+  await deleteService(id);
+  fetchServices();
+};
 
   return (
       <div className="container">
@@ -145,6 +151,12 @@ function App() {
             <p>Service: {s.serviceType}</p>
             <p>Cost: ₹{s.cost}</p>
             <p>Date: {s.serviceDate}</p>
+            <button
+              className="delete-btn"
+              onClick={() => handleDeleteService(s._id)}
+            >
+              Delete
+            </button>
           </div>
         ))}
       </ul>

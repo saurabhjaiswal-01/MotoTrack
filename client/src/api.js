@@ -38,3 +38,9 @@ export const addService = async (data) => {
 
   return res.json();
 };
+
+export const deleteService = async (id) => {
+  await fetch(`http://localhost:5000/api/services/${id}`, {
+    method: "DELETE",
+  });
+};
