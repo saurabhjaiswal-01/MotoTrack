@@ -21,3 +21,20 @@ export const deleteVehicle = async (id) => {
 
   return res.json();
 };
+
+export const getServices = async () => {
+  const res = await fetch("http://localhost:5000/api/services");
+  return res.json();
+};
+
+export const addService = async (data) => {
+  const res = await fetch("http://localhost:5000/api/services", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  return res.json();
+};

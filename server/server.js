@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const connectDB = require("./config/db");
 const vehicleRoutes = require("./routes/vehicleRoutes");
+const serviceRoutes = require("./routes/serviceRoutes");
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/vehicles", vehicleRoutes);
+app.use("/api/services", serviceRoutes);
 
 app.get("/", (req, res) => {
   res.send("MotoTrack API Running");
