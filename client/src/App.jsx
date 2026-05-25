@@ -72,11 +72,37 @@ function App() {
   const handleDeleteService = async (id) => {
   await deleteService(id);
   fetchServices();
-};
+  };
+
+  const totalVehicles = vehicles.length;
+
+  const totalServices = services.length;
+
+  const totalCost = services.reduce(
+    (sum, s) => sum + Number(s.cost),
+    0
+  );
 
   return (
       <div className="container">
       <h1>MotoTrack 🚗</h1>
+
+      <div className="dashboard">
+        <div className="dashboard-card">
+          <h3>Total Vehicles</h3>
+          <p>{totalVehicles}</p>
+        </div>
+
+        <div className="dashboard-card">
+          <h3>Total Services</h3>
+          <p>{totalServices}</p>
+        </div>
+
+        <div className="dashboard-card">
+          <h3>Total Cost</h3>
+          <p>₹{totalCost}</p>
+        </div>
+      </div>
 
       <form onSubmit={handleSubmit}>
         <input
